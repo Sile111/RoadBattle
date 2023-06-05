@@ -23,10 +23,10 @@ let controlsElem;
 const fx = {
     animId: 0,
     element: document.getElementById('fx'),
-    fx: ['../assets/fx/fx-hit/Effect 2 - Sprite Sheet 1 (3).png', '../assets/fx/fx-hit/Effect 2 - Sprite Sheet 1 (2).png', '../assets/fx/fx-hit/Effect 2 - Sprite Sheet 1 (1).png', '../assets/fx/fx-hit/Effect 2 - Sprite Sheet 1.png', ],
-    fxSuper: ['../assets/fx/fx-super/frame0000.png', '../assets/fx/fx-super/frame0001.png', '../assets/fx/fx-super/frame0002.png', '../assets/fx/fx-super/frame0003.png', '../assets/fx/fx-super/frame0004.png', '../assets/fx/fx-super/frame0005.png', '../assets/fx/fx-super/frame0006.png', '../assets/fx/fx-super/frame0007.png', '../assets/fx/fx-super/frame0008.png', '../assets/fx/fx-super/frame0009.png', '../assets/fx/fx-super/frame0010.png',  '../assets/fx/fx-super/frame0011.png',  '../assets/fx/fx-super/frame0012.png',  '../assets/fx/fx-super/frame0013.png',  '../assets/fx/fx-super/frame0014.png',  '../assets/fx/fx-super/frame0015.png', ],
-    fxSuperHero: ['../assets/fx/fx-super-hero/frame0000.png', '../assets/fx/fx-super-hero/frame0001.png', '../assets/fx/fx-super-hero/frame0002.png', '../assets/fx/fx-super-hero/frame0003.png', '../assets/fx/fx-super-hero/frame0004.png', '../assets/fx/fx-super-hero/frame0005.png', '../assets/fx/fx-super-hero/frame0006.png', ],
-    fxSuperUndead: ['../assets/fx/fx-undead/fx-undead.png', '../assets/fx/fx-undead/fx-undead (1).png', '../assets/fx/fx-undead/fx-undead (2).png', '../assets/fx/fx-undead/fx-undead (3).png', '../assets/fx/fx-undead/fx-undead (4).png', '../assets/fx/fx-undead/fx-undead (5).png', '../assets/fx/fx-undead/fx-undead (6).png', '../assets/fx/fx-undead/fx-undead (7).png', '../assets/fx/fx-undead/fx-undead.png', '../assets/fx/fx-undead/fx-undead (1).png', '../assets/fx/fx-undead/fx-undead (2).png', '../assets/fx/fx-undead/fx-undead (3).png', '../assets/fx/fx-undead/fx-undead (4).png', '../assets/fx/fx-undead/fx-undead (5).png', '../assets/fx/fx-undead/fx-undead (6).png', '../assets/fx/fx-undead/fx-undead (7).png'],
+    fx: ['assets/fx/fx-hit/Effect 2 - Sprite Sheet 1 (3).png', 'assets/fx/fx-hit/Effect 2 - Sprite Sheet 1 (2).png', 'assets/fx/fx-hit/Effect 2 - Sprite Sheet 1 (1).png', 'assets/fx/fx-hit/Effect 2 - Sprite Sheet 1.png', ],
+    fxSuper: ['assets/fx/fx-super/frame0000.png', 'assets/fx/fx-super/frame0001.png', 'assets/fx/fx-super/frame0002.png', 'assets/fx/fx-super/frame0003.png', 'assets/fx/fx-super/frame0004.png', 'assets/fx/fx-super/frame0005.png', 'assets/fx/fx-super/frame0006.png', 'assets/fx/fx-super/frame0007.png', 'assets/fx/fx-super/frame0008.png', 'assets/fx/fx-super/frame0009.png', 'assets/fx/fx-super/frame0010.png',  'assets/fx/fx-super/frame0011.png',  'assets/fx/fx-super/frame0012.png',  'assets/fx/fx-super/frame0013.png',  'assets/fx/fx-super/frame0014.png',  'assets/fx/fx-super/frame0015.png', ],
+    fxSuperHero: ['assets/fx/fx-super-hero/frame0000.png', 'assets/fx/fx-super-hero/frame0001.png', 'assets/fx/fx-super-hero/frame0002.png', 'assets/fx/fx-super-hero/frame0003.png', 'assets/fx/fx-super-hero/frame0004.png', 'assets/fx/fx-super-hero/frame0005.png', 'assets/fx/fx-super-hero/frame0006.png', ],
+    fxSuperUndead: ['assets/fx/fx-undead/fx-undead.png', 'assets/fx/fx-undead/fx-undead (1).png', 'assets/fx/fx-undead/fx-undead (2).png', 'assets/fx/fx-undead/fx-undead (3).png', 'assets/fx/fx-undead/fx-undead (4).png', 'assets/fx/fx-undead/fx-undead (5).png', 'assets/fx/fx-undead/fx-undead (6).png', 'assets/fx/fx-undead/fx-undead (7).png', 'assets/fx/fx-undead/fx-undead.png', 'assets/fx/fx-undead/fx-undead (1).png', 'assets/fx/fx-undead/fx-undead (2).png', 'assets/fx/fx-undead/fx-undead (3).png', 'assets/fx/fx-undead/fx-undead (4).png', 'assets/fx/fx-undead/fx-undead (5).png', 'assets/fx/fx-undead/fx-undead (6).png', 'assets/fx/fx-undead/fx-undead (7).png'],
 };
 
 const hero = {
@@ -34,12 +34,12 @@ const hero = {
     timeoutId: 0,
     element: document.getElementById('hero'),
     superStack: 0,
-    idle: ['../assets/hero/idle/idle4.png', '../assets/hero/idle/idle5.png', '../assets/hero/idle/idle6.png', '../assets/hero/idle/idle7.png'],
-    attack: ['../assets/hero/attack/attack1.png', '../assets/hero/attack/attack2.png', '../assets/hero/attack/attack3.png', '../assets/hero/attack/attack4.png', ],
-    attack2: ['../assets/hero/attack2/adventurer-bow-00.png', '../assets/hero/attack2/adventurer-bow-01.png', '../assets/hero/attack2/adventurer-bow-02.png', '../assets/hero/attack2/adventurer-bow-03.png', '../assets/hero/attack2/adventurer-bow-04.png', '../assets/hero/attack2/adventurer-bow-05.png', '../assets/hero/attack2/adventurer-bow-06.png', '../assets/hero/attack2/adventurer-bow-07.png', '../assets/hero/attack2/adventurer-bow-08.png', ],
-    run: ['../assets/hero/run/run1.png', '../assets/hero/run/run2.png', '../assets/hero/run/run3.png', '../assets/hero/run/run4.png', '../assets/hero/run/run5.png', '../assets/hero/run/run6.png', ],
-    die: ['../assets/hero/die/die1.png', '../assets/hero/die/die2.png', '../assets/hero/die/die3.png', '../assets/hero/die/die4.png', '../assets/hero/die/die5.png', '../assets/hero/die/die6.png', '../assets/hero/die/die7.png', ],
-    block: ['../assets/hero/block/block1.png', '../assets/hero/block/block2.png', '../assets/hero/block/block3.png', ],
+    idle: ['assets/hero/idle/idle4.png', 'assets/hero/idle/idle5.png', 'assets/hero/idle/idle6.png', 'assets/hero/idle/idle7.png'],
+    attack: ['assets/hero/attack/attack1.png', 'assets/hero/attack/attack2.png', 'assets/hero/attack/attack3.png', 'assets/hero/attack/attack4.png', ],
+    attack2: ['assets/hero/attack2/adventurer-bow-00.png', 'assets/hero/attack2/adventurer-bow-01.png', 'assets/hero/attack2/adventurer-bow-02.png', 'assets/hero/attack2/adventurer-bow-03.png', 'assets/hero/attack2/adventurer-bow-04.png', 'assets/hero/attack2/adventurer-bow-05.png', 'assets/hero/attack2/adventurer-bow-06.png', 'assets/hero/attack2/adventurer-bow-07.png', 'assets/hero/attack2/adventurer-bow-08.png', ],
+    run: ['assets/hero/run/run1.png', 'assets/hero/run/run2.png', 'assets/hero/run/run3.png', 'assets/hero/run/run4.png', 'assets/hero/run/run5.png', 'assets/hero/run/run6.png', ],
+    die: ['assets/hero/die/die1.png', 'assets/hero/die/die2.png', 'assets/hero/die/die3.png', 'assets/hero/die/die4.png', 'assets/hero/die/die5.png', 'assets/hero/die/die6.png', 'assets/hero/die/die7.png', ],
+    block: ['assets/hero/block/block1.png', 'assets/hero/block/block2.png', 'assets/hero/block/block3.png', ],
     life: 4,
     shield: 3,
     originalShield: 3,
@@ -48,11 +48,11 @@ const hero = {
 const skeleton = {
     animId: 0,
     element: null,
-    idle: ['../assets/skeleton/idle/Skeleton Idle1.png', '../assets/skeleton/idle/Skeleton Idle2.png', '../assets/skeleton/idle/Skeleton Idle3.png', '../assets/skeleton/idle/Skeleton Idle4.png', '../assets/skeleton/idle/Skeleton Idle5.png', '../assets/skeleton/idle/Skeleton Idle6.png', '../assets/skeleton/idle/Skeleton Idle7.png', '../assets/skeleton/idle/Skeleton Idle8.png', '../assets/skeleton/idle/Skeleton Idle9.png', '../assets/skeleton/idle/Skeleton Idle10.png', '../assets/skeleton/idle/Skeleton Idle11.png', ],
-    attack: ['../assets/skeleton/attack/Skeleton Attack1.png', '../assets/skeleton/attack/Skeleton Attack2.png', '../assets/skeleton/attack/Skeleton Attack3.png', '../assets/skeleton/attack/Skeleton Attack4.png', '../assets/skeleton/attack/Skeleton Attack5.png', ],
-    hit: ['../assets/skeleton/hit/Skeleton Hit1.png', '../assets/skeleton/hit/Skeleton Hit2.png', '../assets/skeleton/hit/Skeleton Hit3.png', '../assets/skeleton/hit/Skeleton Hit4.png', '../assets/skeleton/hit/Skeleton Hit5.png',  '../assets/skeleton/hit/Skeleton Hit6.png',  '../assets/skeleton/hit/Skeleton Hit7.png',  '../assets/skeleton/hit/Skeleton Hit8.png', ],
-    run: ['../assets/skeleton/run/Skeleton Walk1.png', '../assets/skeleton/run/Skeleton Walk2.png', '../assets/skeleton/run/Skeleton Walk3.png', '../assets/skeleton/run/Skeleton Walk4.png', '../assets/skeleton/run/Skeleton Walk5.png', '../assets/skeleton/run/Skeleton Walk6.png', '../assets/skeleton/run/Skeleton Walk7.png', ],
-    die: ['../assets/skeleton/die/Skeleton Dead1.png', '../assets/skeleton/die/Skeleton Dead2.png', '../assets/skeleton/die/Skeleton Dead3.png', '../assets/skeleton/die/Skeleton Dead4.png', '../assets/skeleton/die/Skeleton Dead5.png', ],
+    idle: ['assets/skeleton/idle/Skeleton Idle1.png', 'assets/skeleton/idle/Skeleton Idle2.png', 'assets/skeleton/idle/Skeleton Idle3.png', 'assets/skeleton/idle/Skeleton Idle4.png', 'assets/skeleton/idle/Skeleton Idle5.png', 'assets/skeleton/idle/Skeleton Idle6.png', 'assets/skeleton/idle/Skeleton Idle7.png', 'assets/skeleton/idle/Skeleton Idle8.png', 'assets/skeleton/idle/Skeleton Idle9.png', 'assets/skeleton/idle/Skeleton Idle10.png', 'assets/skeleton/idle/Skeleton Idle11.png', ],
+    attack: ['assets/skeleton/attack/Skeleton Attack1.png', 'assets/skeleton/attack/Skeleton Attack2.png', 'assets/skeleton/attack/Skeleton Attack3.png', 'assets/skeleton/attack/Skeleton Attack4.png', 'assets/skeleton/attack/Skeleton Attack5.png', ],
+    hit: ['assets/skeleton/hit/Skeleton Hit1.png', 'assets/skeleton/hit/Skeleton Hit2.png', 'assets/skeleton/hit/Skeleton Hit3.png', 'assets/skeleton/hit/Skeleton Hit4.png', 'assets/skeleton/hit/Skeleton Hit5.png',  'assets/skeleton/hit/Skeleton Hit6.png',  'assets/skeleton/hit/Skeleton Hit7.png',  'assets/skeleton/hit/Skeleton Hit8.png', ],
+    run: ['assets/skeleton/run/Skeleton Walk1.png', 'assets/skeleton/run/Skeleton Walk2.png', 'assets/skeleton/run/Skeleton Walk3.png', 'assets/skeleton/run/Skeleton Walk4.png', 'assets/skeleton/run/Skeleton Walk5.png', 'assets/skeleton/run/Skeleton Walk6.png', 'assets/skeleton/run/Skeleton Walk7.png', ],
+    die: ['assets/skeleton/die/Skeleton Dead1.png', 'assets/skeleton/die/Skeleton Dead2.png', 'assets/skeleton/die/Skeleton Dead3.png', 'assets/skeleton/die/Skeleton Dead4.png', 'assets/skeleton/die/Skeleton Dead5.png', ],
     life: 0,
     originalLife: 3,
 };
@@ -60,11 +60,11 @@ const skeleton = {
 const slime = {
     animId: 0,
     element: null,
-    idle: ['../assets/slime/idle/slime-idle-0.png', '../assets/slime/idle/slime-idle-1.png', '../assets/slime/idle/slime-idle-2.png', '../assets/slime/idle/slime-idle-3.png', ],
-    attack: ['../assets/slime/attack/slime-attack-0.png', '../assets/slime/attack/slime-attack-1.png', '../assets/slime/attack/slime-attack-2.png', '../assets/slime/attack/slime-attack-3.png', '../assets/slime/attack/slime-attack-4.png', ],
-    hit: ['../assets/slime/hit/slime-hurt-0.png', '../assets/slime/hit/slime-hurt-1.png', '../assets/slime/hit/slime-hurt-2.png', '../assets/slime/hit/slime-hurt-3.png',],
-    run: ['../assets/slime/run/slime-move-0.png', '../assets/slime/run/slime-move-1.png', '../assets/slime/run/slime-move-2.png', '../assets/slime/run/slime-move-3.png', ],
-    die: ['../assets/slime/die/slime-die-0.png', '../assets/slime/die/slime-die-1.png', '../assets/slime/die/slime-die-2.png', '../assets/slime/die/slime-die-3.png', ],
+    idle: ['assets/slime/idle/slime-idle-0.png', 'assets/slime/idle/slime-idle-1.png', 'assets/slime/idle/slime-idle-2.png', 'assets/slime/idle/slime-idle-3.png', ],
+    attack: ['assets/slime/attack/slime-attack-0.png', 'assets/slime/attack/slime-attack-1.png', 'assets/slime/attack/slime-attack-2.png', 'assets/slime/attack/slime-attack-3.png', 'assets/slime/attack/slime-attack-4.png', ],
+    hit: ['assets/slime/hit/slime-hurt-0.png', 'assets/slime/hit/slime-hurt-1.png', 'assets/slime/hit/slime-hurt-2.png', 'assets/slime/hit/slime-hurt-3.png',],
+    run: ['assets/slime/run/slime-move-0.png', 'assets/slime/run/slime-move-1.png', 'assets/slime/run/slime-move-2.png', 'assets/slime/run/slime-move-3.png', ],
+    die: ['assets/slime/die/slime-die-0.png', 'assets/slime/die/slime-die-1.png', 'assets/slime/die/slime-die-2.png', 'assets/slime/die/slime-die-3.png', ],
     life: 0,
     originalLife: 2,
 };
@@ -72,26 +72,26 @@ const slime = {
 const undead = {
     animId: 0,
     element: null,
-    idle: ['../assets/undead/idle/idle1.png', '../assets/undead/idle/idle2.png', '../assets/undead/idle/idle3.png', '../assets/undead/idle/idle4.png', '../assets/undead/idle/idle5.png', '../assets/undead/idle/idle6.png', '../assets/undead/idle/idle7.png', ],
-    attack: ['../assets/undead/attack/attack1.png', '../assets/undead/attack/attack2.png', '../assets/undead/attack/attack3.png', '../assets/undead/attack/attack4.png', ],
-    attack2: ['../assets/undead/attack2/hit1.png', '../assets/undead/attack2/hit2.png', '../assets/undead/attack2/hit3.png', '../assets/undead/attack2/hit4.png', '../assets/undead/attack2/hit5.png', '../assets/undead/attack2/hit6.png', '../assets/undead/attack2/hit7.png', '../assets/undead/attack2/hit8.png', '../assets/undead/attack2/hit9.png', '../assets/undead/attack2/hit10.png', '../assets/undead/attack2/hit11.png', ],
-    hit: ['../assets/undead/hit/hit1.png', '../assets/undead/hit/hit2.png', '../assets/undead/hit/hit3.png', '../assets/undead/hit/hit4.png',],
-    run: ['../assets/undead/run/run1.png', '../assets/undead/run/run2.png', '../assets/undead/run/run3.png', '../assets/undead/run/run4.png',],
-    die: ['../assets/undead/die/die1.png', '../assets/undead/die/die2.png', '../assets/undead/die/die3.png', '../assets/undead/die/die4.png', '../assets/undead/die/die5.png', '../assets/undead/die/die6.png', '../assets/undead/die/die7.png', '../assets/undead/die/die8.png', '../assets/undead/die/die9.png', '../assets/undead/die/die10.png', '../assets/undead/die/die11.png', '../assets/undead/die/die12.png', '../assets/undead/die/die13.png', '../assets/undead/die/die14.png', '../assets/undead/die/die15.png', '../assets/undead/die/die16.png', '../assets/undead/die/die17.png', '../assets/undead/die/die18.png', '../assets/undead/die/die19.png', '../assets/undead/die/die20.png'],
+    idle: ['assets/undead/idle/idle1.png', 'assets/undead/idle/idle2.png', 'assets/undead/idle/idle3.png', 'assets/undead/idle/idle4.png', 'assets/undead/idle/idle5.png', 'assets/undead/idle/idle6.png', 'assets/undead/idle/idle7.png', ],
+    attack: ['assets/undead/attack/attack1.png', 'assets/undead/attack/attack2.png', 'assets/undead/attack/attack3.png', 'assets/undead/attack/attack4.png', ],
+    attack2: ['assets/undead/attack2/hit1.png', 'assets/undead/attack2/hit2.png', 'assets/undead/attack2/hit3.png', 'assets/undead/attack2/hit4.png', 'assets/undead/attack2/hit5.png', 'assets/undead/attack2/hit6.png', 'assets/undead/attack2/hit7.png', 'assets/undead/attack2/hit8.png', 'assets/undead/attack2/hit9.png', 'assets/undead/attack2/hit10.png', 'assets/undead/attack2/hit11.png', ],
+    hit: ['assets/undead/hit/hit1.png', 'assets/undead/hit/hit2.png', 'assets/undead/hit/hit3.png', 'assets/undead/hit/hit4.png',],
+    run: ['assets/undead/run/run1.png', 'assets/undead/run/run2.png', 'assets/undead/run/run3.png', 'assets/undead/run/run4.png',],
+    die: ['assets/undead/die/die1.png', 'assets/undead/die/die2.png', 'assets/undead/die/die3.png', 'assets/undead/die/die4.png', 'assets/undead/die/die5.png', 'assets/undead/die/die6.png', 'assets/undead/die/die7.png', 'assets/undead/die/die8.png', 'assets/undead/die/die9.png', 'assets/undead/die/die10.png', 'assets/undead/die/die11.png', 'assets/undead/die/die12.png', 'assets/undead/die/die13.png', 'assets/undead/die/die14.png', 'assets/undead/die/die15.png', 'assets/undead/die/die16.png', 'assets/undead/die/die17.png', 'assets/undead/die/die18.png', 'assets/undead/die/die19.png', 'assets/undead/die/die20.png'],
     life: 0,
     superStack: 0,
     originalLife: 5,
 };
 
 const sound = {
-    attack: '../assets/sound/attack/DesignedPunch4.wav',
-    attackHero: '../assets/sound/attack/hero.mp3',
-    block: '../assets/sound/block/35_Miss_Evade_02.wav',
-    die: '../assets/sound/die/69_Enemy_death_01.wav',
-    run: '../assets/sound/run/03_Step_grass_03.wav',
-    blink: '../assets/sound/attack/5c71c091f8f9bfd.mp3',
-    electro: '../assets/sound/attack/electr.mp3',
-    bg: '../assets/sound/bg-music.mp3',
+    attack: 'assets/sound/attack/DesignedPunch4.wav',
+    attackHero: 'assets/sound/attack/hero.mp3',
+    block: 'assets/sound/block/35_Miss_Evade_02.wav',
+    die: 'assets/sound/die/69_Enemy_death_01.wav',
+    run: 'assets/sound/run/03_Step_grass_03.wav',
+    blink: 'assets/sound/attack/5c71c091f8f9bfd.mp3',
+    electro: 'assets/sound/attack/electr.mp3',
+    bg: 'assets/sound/bg-music.mp3',
 }
 
 
@@ -604,9 +604,9 @@ const createBarIcon = (png, type, iconType) => {
         icon.classList.add('heart');
     }
     if (type === 'hero') {
-        icon.style.backgroundImage = `url("../assets/bar/${png}.png")`;
+        icon.style.backgroundImage = `url("assets/bar/${png}.png")`;
     } else {
-        icon.style.backgroundImage = `url("../assets/bar/${png}-enemy.png")`;
+        icon.style.backgroundImage = `url("assets/bar/${png}-enemy.png")`;
     }
     return icon;
 }
@@ -633,9 +633,9 @@ const watchHeroBar = (originalStat, type, source, target) => {
         }
     }
     if (hero.superStack === 3) {
-        hit.style.backgroundImage = 'url("../assets/bar/bow-button.png")';
+        hit.style.backgroundImage = 'url("assets/bar/bow-button.png")';
     } else {
-        hit.style.backgroundImage = 'url("../assets/bar/attack-button.png")';
+        hit.style.backgroundImage = 'url("assets/bar/attack-button.png")';
     }
 }
 const watchLifeBarEnemy = (originalEnemyLife, enemy) => {
