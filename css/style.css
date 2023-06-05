@@ -1,0 +1,370 @@
+@font-face {
+    font-family: 'eightBits';
+    src: url(../assets/EpilepsySansBold.ttf);
+}
+::-webkit-scrollbar { width: 0;}
+
+body {
+    background-color: #000000;
+    zoom: 150%;
+    font-family: 'eightBits';
+}
+
+
+
+.field {
+    width: 430px;
+    height: 325px;
+    background-image: url("../assets/bg.png");
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    margin-top: 40px;
+    overflow: hidden;
+}
+
+.main {
+    width: 430px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.heroLife {
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: center;
+}
+.heroBless {
+    position: absolute;
+    left: 0;
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+}
+.enemyLife {
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+.heroShield {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.hero {
+    width: 50px;
+    height: 37px;
+    background-image: url("../assets/hero/idle/idle4.png");
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    bottom: 75px;
+    left: 20px;
+    z-index: 2;
+}
+
+.skeleton {
+    width: 43px;
+    height: 37px;
+    background-image: url("../assets/skeleton/idle/Skeleton Idle1.png");
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    transform: scale(-1, 1);
+    position: absolute;
+    bottom: 75px;
+    right: 50px;
+    z-index: 1;
+}
+
+.slime {
+    width: 32px;
+    height: 25px;
+    background-image: url("../assets/slime/idle/slime-idle-0.png");
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 75px;
+    right: 45px;
+    z-index: 1;
+}
+
+.undead {
+    width: 100px;
+    height: 100px;
+    background-image: url("../assets/undead/idle/idle1.png");
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    transform: scale(-1, 1);
+    position: absolute;
+    bottom: 50px;
+    right: 20px;
+    z-index: 1;
+}
+
+.fx {
+    width: 34px;
+    height: 26px;
+    background-image: url("../assets/fx/fx-hit/Effect 2 - Sprite Sheet 1.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 80px;
+    right: 50px;
+    z-index: 3;
+}
+.heroLife, .enemyLife, .heroShield {
+    margin-top: 5px;
+}
+.heart {
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 2px;
+}
+
+.shield {
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 2px;
+}
+.bless {
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 12px;
+    transform: rotate(90deg);
+}
+
+.overlay.is-visible {
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    z-index: 4;
+}
+.gameOver {
+    color: #8c613f;
+    font-size: 80px;
+    margin-top: -100px;
+}
+.gameOver:hover {
+    color: #ffbb80;
+    cursor: pointer;
+}
+.score {
+    position: absolute;
+    right: -300px;
+    width: 300px;
+    height: 100px;
+    background-image: url("../assets/bar/table.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.score p {
+    margin: 0;
+    font-size: 18px;
+    color: #8c613f;
+}
+.action {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 25px;
+    top: 80px;
+    opacity: 0;
+    transition: all 0.7s ease-out;
+}
+.action.visibility {
+    opacity: 100%;
+}
+.controls {
+    position: absolute;
+    justify-content: space-between;
+    width: 160px;
+    margin-top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+@keyframes scalePop {
+    0% {
+        scale: 1;
+    }
+    50% {
+        scale: 1.2;
+    }
+    100% {
+        scale: 1;
+    }
+
+}
+.hit {
+    width: 50px;
+    height: 50px;
+    background-color: unset;
+    border: 0;
+    background-image: url("../assets/bar/attack-button.png");
+    background-size: cover;
+    background-position: center;
+    animation: scalePop 2s linear infinite;
+    margin-right: 50px;
+}
+.hitRule {
+    width: 65px;
+    height: 65px;
+    background-color: unset;
+    border: 0;
+    background-image: url("../assets/bar/attack-button.png");
+    background-size: cover;
+    background-position: center;
+}
+.hit:hover, .block:hover {
+    animation: none;
+    scale: 1;
+}
+.block {
+    width: 50px;
+    height: 50px;
+    background-color: unset;
+    border: 0;
+    background-image: url("../assets/bar/shield-full.png");
+    background-size: cover;
+    background-position: center;
+    animation: scalePop 2s linear infinite;
+}
+.blockRule {
+    width: 40px;
+    height: 40px;
+    background-color: unset;
+    border: 0;
+    background-image: url("../assets/bar/shield-full.png");
+    background-size: cover;
+    background-position: center;
+}
+.restart {
+    background-color: #422815;
+    border-radius: 3px;
+    width: 100px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+}
+.restart:hover {
+    color: #ffbe8e;
+}
+.play {
+    font-size: 40px;
+    width: 150px;
+    border: 0;
+    border-radius: 3px;
+    background-color: #422815;
+    color: #8c613f;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.play:hover {
+    background-color: #8a5d39;
+    color: #dca379;
+}
+.textRule {
+    width: 200px;
+}
+.rules {
+    font-size: 10px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #422815;
+    color: #8c613f;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+.rulesInner {
+    font-size: 8px;
+    position: absolute;
+    border-radius: 3px;
+    width: 230px;
+    left: -280px;
+    height: 325px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #422815;
+    color: #a17352;
+}
+.rules.is-visible {
+    display: none;
+}
+.pair {
+    display: flex;
+    width: 350px;
+    justify-content: space-between;
+    align-items: center;
+}
+.shields, .blessings {
+    display: flex;
+    align-items: center;
+    height: 20px;
+}
+.shieldRule {
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+    background-color: unset;
+    border: 0;
+    background-image: url("../assets/bar/shield-full.png");
+    background-size: cover;
+    background-position: center;
+}
+.shieldRule:nth-child(3n) {
+    background-image: url("../assets/bar/shield-empty.png");
+}
+.containerRule {
+    display: flex;
+    align-items: center;
+}
+.blessing {
+    width: 30px;
+    height: 30px;
+    margin-right: 2px;
+    background-color: unset;
+    border: 0;
+    background-image: url("../assets/bar/bless-full.png");
+    background-size: cover;
+    background-position: center;
+    transform: rotate(90deg);
+}
+.blessing:nth-child(3n) {
+    background-image: url("../assets/bar/bless-empty.png");
+}
+span {
+    color: #ffbb80;
+}

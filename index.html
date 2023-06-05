@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="script/script.js" defer></script>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="overlay" id="overlay" hidden>
+    <p class="gameOver" id="gameOver">GAME OVER</p>
+</div>
+
+   <main class="main" hidden id="main">
+       <div class="score">
+           <p class="currentScore" id="currentScore"></p>
+           <p class="enemiesKilled" id="enemiesKilled"></p>
+           <p class="previousScore" id="previousScore"></p>
+           <p class="restart" id="restart">RESTART</p>
+       </div>
+
+       <div class="rulesInner" id="rulesInner">
+           <p class="textRule">Вам доступны следующие действия: <br>
+               <span>1. Провести атаку <br>
+            2. Использвать щит</span>
+           </p>
+               <p class="textRule">1. Если вы атакуете, когда противник собирается атаковать вас, вы <span>получите удар</span> первые и потеряете <span>1 хп</span>.
+                   Однако, если вы проведёте атаку, когда противник не собирается этого делать,
+                   вы <span>нанесёте ему урон</span> и восстановите <span>одну попытку использования щита</span>, а также накопите <span>один заряд благословения</span>.
+               </p>
+
+               <p class="textRule">  Три заряда благословения заменяют вашу обычную атаку на <span>супер-атаку</span>, которая 100% пробьёт
+                   противника, снимет ему <span>2 хп</span>, восстановит ваше <span>1 хп</span> и <span>2 попытки использования щита</span></p>
+
+               <p class="textRule">2. Если вы используете щит, когда противник собирается атаковать вас,
+                   вы не получите урона и <span>восстановите 1 хп</span>. Однако, если вы проведёте атаку, когда противник не собирается этого делать,
+                   вы впустую <span>потратите 1 попытку щита</span>.</p>
+           <p class="textRule"><span>Цель игры:</span> заработать 1000 очков</p>
+       </div>
+
+       <div class="field" id="field">
+           <p class="action" id="action"></p>
+           <div class="hero" id="hero"></div>
+           <div class="fx" id="fx" hidden></div>
+       </div>
+       <div class="heroLife" id="heroLife"></div>
+       <div class="heroBless" id="heroBless"></div>
+       <div class="heroShield" id="heroShield"></div>
+       <div class="enemyLife" id="enemyLife"></div>
+       <div class="controls" id="controls">
+           <button class="hit" id="hit"></button>
+           <button class="block" id="block"></button>
+       </div>
+
+   </main>
+
+    <div class="rules" id="rules">
+        <p class="titleRule"><span>Важно!</span> Правила игры</p>
+        <p class="textRule">По ходу путешествия вам на дороге встречаются враги, с которыми вам приходится сражаться</p>
+        <p class="textRule">Каждый ход противник решает <span>атакует он вас или нет</span>, что решает итог каждого хода</p>
+        <p class="textRule">Вам доступны следующие действия: <br>
+            <span>1. Провести атаку <br>
+            2. Использвать щит</span>
+        </p>
+        <div class="pair">
+            <p class="textRule">1. Если вы атакуете, когда противник собирается атаковать вас, вы <span>получите удар</span> первые и потеряете <span>1 хп</span>.
+                Однако, если вы проведёте атаку, когда противник не собирается этого делать,
+                вы <span>нанесёте ему урон</span> и восстановите <span>одну попытку использования щита</span>, а также накопите <span>один заряд благословения</span>.
+            </p>
+            <div class="hitRule"></div>
+        </div>
+        <div class="pair">
+        <p class="textRule">  Три заряда благословения заменяют вашу обычную атаку на <span>супер-атаку</span>, которая 100% пробьёт
+        противника, снимет ему <span>2 хп</span>, восстановит ваше <span>1 хп</span> и <span>2 попытки использования щита</span></p>
+            <div class="blessings">
+                <div class="blessing"></div>
+                <div class="blessing"></div>
+                <div class="blessing"></div>
+            </div>
+        </div>
+
+        <div class="pair">
+            <p class="textRule">2. Если вы используете щит, когда противник собирается атаковать вас,
+                вы не получите урона и <span>восстановите 1 хп</span>. Однако, если вы проведёте атаку, когда противник не собирается этого делать,
+                вы впустую <span>потратите 1 попытку щита</span>.</p>
+            <div class="containerRule">
+                <div class="blockRule"></div>
+                <div class="shields">
+                    <div class="shieldRule"></div>
+                    <div class="shieldRule"></div>
+                    <div class="shieldRule"></div>
+                </div>
+            </div>
+        </div>
+        <p class="textRule"><span>Цель игры:</span> заработать 1000 очков</p>
+    </div>
+    <button class="play" id="play">PLAY</button>
+
+
+</body>
+</html>
