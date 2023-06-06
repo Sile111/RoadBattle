@@ -94,6 +94,35 @@ const sound = {
     bg: 'assets/sound/bg-music.mp3',
 }
 
+const source = [
+    fx.fx,
+    fx.fxSuper,
+    fx.fxSuperHero,
+    fx.fxSuperUndead,
+    hero.idle,
+    hero.attack,
+    hero.attack2,
+    hero.run,
+    hero.die,
+    hero.block,
+    skeleton.idle,
+    skeleton.attack,
+    skeleton.hit,
+    skeleton.run,
+    skeleton.die,
+    slime.idle,
+    slime.attack,
+    slime.hit,
+    slime.run,
+    slime.die,
+    undead.idle,
+    undead.attack,
+    undead.attack2,
+    undead.hit,
+    undead.run,
+    undead.die
+];
+
 
 let currentEnemy = null;
 let curScore = 0;
@@ -871,22 +900,61 @@ const endlessScene = () => {
 
 }
 
-play.addEventListener('click', e => {
-    main.hidden = false;
-    play.hidden = true;
-    rules.classList.add('is-visible')
-    endlessScene();
 
-    previousScore.innerText = `PREVIOUS SCORE: ${prevScore}`;
-    currentScore.innerText = `CURRENT SCORE: ${curScore}`;
-    enemiesKilled.innerText = `ENEMIES KILLED: ${killedEnemies}`;
+const startTheGame = () => {
+    play.addEventListener('click', e => {
+        main.hidden = false;
+        play.hidden = true;
+        rules.classList.add('is-visible')
+        endlessScene();
 
-    restart.addEventListener('click', () => {
-        clearScene();
-    })
-})
+        playAudio(sound.bg);
+        setInterval(() => {
+            playAudio(sound.bg);
+        }, 89000);
 
+        previousScore.innerText = `PREVIOUS SCORE: ${prevScore}`;
+        currentScore.innerText = `CURRENT SCORE: ${curScore}`;
+        enemiesKilled.innerText = `ENEMIES KILLED: ${killedEnemies}`;
 
+        restart.addEventListener('click', () => {
+            clearScene();
+        });
+    });
+
+}
+
+const preloadImages = (sources, callback) => {
+    let imgs = [],   // массив HTML-элементов img для предзагрузки картинок
+        loaded = []; // массив HTML-элементов img с загруженной картинкой
+
+    // цикл выполнения предзагрузки заданных картинок
+    for (let i = 0; i < sources.length; i++) {
+        let elem = sources[i];
+        for (let j = 0; j < elem.length; j++) {
+
+            // запуск предзагрузки очередной картинки
+            let img = document.createElement("img");
+            img.src = sources[i][j];
+
+            // после окончания предзагрузки картинки поместить ее в массив загруженных,
+            // и проверить, если это была последняя из заданных картинок, то запустить
+            // функцию callback
+            img.addEventListener("load", onLoad);
+            img.addEventListener("error", onLoad);
+            function onLoad() {
+                loaded.push(this);
+                if (loaded.length == sources.length) callback();
+            }
+
+            imgs.push(img);
+            console.log('preloaded');
+        }
+    }
+
+}
+
+preloadImages(source, startTheGame);
 
 
 
