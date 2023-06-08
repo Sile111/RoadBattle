@@ -185,15 +185,28 @@ body {
     color: #8c613f;
 }
 .action {
+    font-size: 17px;
+    text-align: center;
+    width: 150px;
+}
+.actionBg {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 25px;
     top: 80px;
     opacity: 0;
     transition: all 0.7s ease-out;
+    background-image: url("../assets/bar/action-pop.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 400px;
+    height: 100px;
 }
-.action.visibility {
+.actionBg.visibility {
     opacity: 100%;
 }
 .controls {
@@ -368,3 +381,17 @@ body {
 span {
     color: #ffbb80;
 }
+
+/*@media screen and (max-width: 360px) and (orientation: portrait) {*/
+/*    body {*/
+/*        transform: rotate(90deg);*/
+/*    }*/
+/*    .textRule {*/
+/*        width: 300px;*/
+/*    }*/
+/*}*/
+/*@media screen and (orientation: landscape) and (max-width: 360px){*/
+/*    body {*/
+/*        transform: rotate(0deg);*/
+/*    }*/
+/*}*/

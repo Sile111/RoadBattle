@@ -10,7 +10,6 @@ const heroShield = document.getElementById('heroShield');
 const heroBless = document.getElementById('heroBless');
 const enemyLife = document.getElementById('enemyLife');
 const overlay = document.getElementById('overlay');
-const overlayVictory = document.getElementById('overlayVictory');
 const gameOver = document.getElementById('gameOver');
 const currentScore = document.getElementById('currentScore');
 const enemiesKilled = document.getElementById('enemiesKilled');
@@ -46,6 +45,7 @@ const hero = {
 };
 
 const skeleton = {
+    name: 'skeleton',
     animId: 0,
     element: null,
     idle: ['assets/skeleton/idle/Skeleton Idle1.png', 'assets/skeleton/idle/Skeleton Idle2.png', 'assets/skeleton/idle/Skeleton Idle3.png', 'assets/skeleton/idle/Skeleton Idle4.png', 'assets/skeleton/idle/Skeleton Idle5.png', 'assets/skeleton/idle/Skeleton Idle6.png', 'assets/skeleton/idle/Skeleton Idle7.png', 'assets/skeleton/idle/Skeleton Idle8.png', 'assets/skeleton/idle/Skeleton Idle9.png', 'assets/skeleton/idle/Skeleton Idle10.png', 'assets/skeleton/idle/Skeleton Idle11.png', ],
@@ -55,9 +55,11 @@ const skeleton = {
     die: ['assets/skeleton/die/Skeleton Dead1.png', 'assets/skeleton/die/Skeleton Dead2.png', 'assets/skeleton/die/Skeleton Dead3.png', 'assets/skeleton/die/Skeleton Dead4.png', 'assets/skeleton/die/Skeleton Dead5.png', ],
     life: 0,
     originalLife: 3,
+    position: -30,
 };
 
 const slime = {
+    name: 'slime',
     animId: 0,
     element: null,
     idle: ['assets/slime/idle/slime-idle-0.png', 'assets/slime/idle/slime-idle-1.png', 'assets/slime/idle/slime-idle-2.png', 'assets/slime/idle/slime-idle-3.png', ],
@@ -67,9 +69,11 @@ const slime = {
     die: ['assets/slime/die/slime-die-0.png', 'assets/slime/die/slime-die-1.png', 'assets/slime/die/slime-die-2.png', 'assets/slime/die/slime-die-3.png', ],
     life: 0,
     originalLife: 2,
+    position: -30,
 };
 
 const undead = {
+    name: 'undead',
     animId: 0,
     element: null,
     idle: ['assets/undead/idle/idle1.png', 'assets/undead/idle/idle2.png', 'assets/undead/idle/idle3.png', 'assets/undead/idle/idle4.png', 'assets/undead/idle/idle5.png', 'assets/undead/idle/idle6.png', 'assets/undead/idle/idle7.png', ],
@@ -81,6 +85,7 @@ const undead = {
     life: 0,
     superStack: 0,
     originalLife: 5,
+    position: -100,
 };
 
 const sound = {
@@ -142,6 +147,7 @@ const playAudio = (type) => {
     }
     audio.play();
 }
+
 const playAudioRepeat = (interval, duration, type) => {
     let audio = setInterval(() => {
         playAudio(type)
@@ -151,95 +157,50 @@ const playAudioRepeat = (interval, duration, type) => {
     }, duration);
 }
 
-const summonSkeleton = () => {
+const summonCreature = (creature, duration, position) => {
     controlsElem.hidden = true;
+
+    if (currentEnemy !== null) {
+        field.removeChild(currentEnemy.element);
+    }
+
     const newSkeleton = document.createElement('div');
-    newSkeleton.classList.add('skeleton');
-    newSkeleton.id = 'skeleton';
+    newSkeleton.classList.add(`${creature.name}`);
+    newSkeleton.id = `${creature.name}`;
     playAudio(sound.run);
-    playAudioRepeat(400, 700, sound.run);
+    playAudioRepeat(400, duration, sound.run);
 
     field.append(newSkeleton);
-    skeleton.element = newSkeleton;
-    skeleton.life = 3;
+    creature.element = newSkeleton;
+    creature.life = creature.originalLife;
 
-    skeleton.element.style.transition = `all ${700}ms linear`
-    skeleton.element.style.right = -30 + 'px';
+    creature.element.style.transition = `all ${duration}ms linear`
+    creature.element.style.right = position + 'px';
 
     setTimeout(e => {
-        skeleton.element.style.right = '';
-        playAudio(sound.run);
-        playAudioRepeat(400, 700, sound.run);
-        animation(skeleton.run, skeleton, 60, 'repeat');
+        creature.element.style.right = '';
+        animation(creature.run, creature, 60, 'repeat');
     }, 500);
 
     setTimeout(e => {
-        animation(skeleton.idle, skeleton, 100, 'repeat');
+        animation(creature.idle, creature, 100, 'repeat');
         controlsElem.hidden = false;
-    }, (skeleton.run.length * 60) + 900);
+    }, (creature.run.length * 60) + 900);
 
-    currentEnemy = skeleton;
-}
+    currentEnemy = creature;
 
-const summonSlime = () => {
-    controlsElem.hidden = true;
-    const newSlime = document.createElement('div');
-    newSlime.classList.add('slime');
-    newSlime.id = 'slime';
+    enemyLife.replaceChildren();
 
-    field.append(newSlime);
-    slime.element = newSlime;
-    slime.life = 2;
-
-
-    slime.element.style.transition = `all ${700}ms linear`
-    slime.element.style.right = -30 + 'px';
-
-    setTimeout(e => {
-        slime.element.style.right = '';
-        playAudio(sound.run);
-        playAudioRepeat(400, 700, sound.run);
-        animation(slime.run, slime, 60, 'repeat');
-    }, 500);
-
-    setTimeout(e => {
-        animation(slime.idle, slime, 100, 'repeat');
-        controlsElem.hidden = false;
-    }, (slime.run.length * 60) + 900);
-
-    currentEnemy = slime;
-}
-
-const summonUndead = () => {
-    controlsElem.hidden = true;
-    const newUndead = document.createElement('div');
-    newUndead.classList.add('undead');
-    newUndead.id = 'undead';
-
-    field.append(newUndead);
-    undead.element = newUndead;
-    undead.life = 5;
-
-
-    undead.element.style.transition = `all ${700}ms linear`
-    undead.element.style.right = -100 + 'px';
-
-    setTimeout(e => {
-        undead.element.style.right = '';
-        playAudio(sound.run);
-        playAudioRepeat(400, 700, sound.run);
-        animation(undead.run, undead, 60, 'repeat');
-    }, 500);
-
-    setTimeout(e => {
-        animation(undead.idle, undead, 100, 'repeat');
-        controlsElem.hidden = false;
-    }, (undead.run.length * 60) + 900);
-
-    currentEnemy = undead;
+    setTimeout(() => {
+        for (let i = 0; i < currentEnemy.life; i++) {
+            enemyLife.append(createBarIcon('heart-full', 'enemy', 'heart'));
+        }
+    }, 1000)
 }
 
 const summonHero = () => {
+    field.removeChild(hero.element);
+
     const newHero = document.createElement('div');
     newHero.classList.add('hero');
     newHero.id = 'hero';
@@ -252,9 +213,27 @@ const summonHero = () => {
     hero.superStack = 0;
     hero.shield = 3;
     hero.element.style.left = '';
+
+
+    heroLife.replaceChildren();
+    heroShield.replaceChildren();
+    heroBless.replaceChildren();
+
+    for (let i = 0; i < hero.life; i++) {
+        heroLife.append(createBarIcon('heart-full', 'hero', 'heart'));
+    }
+    for (let i = 0; i < hero.originalShield; i++) {
+        heroShield.append(createBarIcon('shield-full', 'hero', 'shield'));
+    }
+    for (let i = 0; i < 3; i++) {
+        heroBless.append(createBarIcon('bless-empty', 'hero', 'bless'));
+    }
+
+
+    animation(hero.idle, hero, 200, 'repeat');
 }
 
-const summonControls = () => {
+const createControls = () => {
     const controls = document.createElement('div')
     controls.classList.add('controls');
     controls.id = 'controls';
@@ -308,6 +287,7 @@ const heroWalk = () => {
 
     controlsElem.hidden = true;
 }
+
 const heroWalkVictory = () => {
     animation(hero.run, hero, 80, 'repeat');
     hero.element.style.transition = `all ${1800}ms linear`
@@ -337,7 +317,7 @@ const heroAttack = (enemy) => {
         }, 400)
         setTimeout(() => {
             playAudio(playAudio(sound.attackHero))
-            actionPop(`You hit the enemy!`, '#29a120')
+            actionPop(`You hit the enemy!`, '#ce8751')
         }, 200)
 
         setTimeout(e => {
@@ -359,10 +339,10 @@ const heroAttack = (enemy) => {
     }, 1400 + ((hero.attack.length) * 200));
 }
 
-const heroSuperAttack = (enemy) => {
+const heroSuperAttack = () => {
     controlsElem.hidden = true;
     animation(hero.attack2, hero, 100);
-    actionPop(`Super attack!`, '#430093')
+    actionPop(`Super attack!`, '#d06f18')
 
     playAudio(sound.blink)
 
@@ -442,7 +422,7 @@ const enemyAttack = (enemy) => {
         }, heroBlockTimeout);
 
         setTimeout(e => {
-            actionPop(`Blocked!`, '#fc4d00')
+            actionPop(`Blocked!`, '#a17249')
             fx.element.hidden = false;
             fx.element.style.right = '360' + 'px';
             animation(fx.fx, fx, 100);
@@ -470,29 +450,30 @@ const enemyAttack = (enemy) => {
     }, 1200 + ((enemy.attack.length) * 100));
 }
 
-const enemyCounterAttack = (enemy) => {
+const enemyCounterAttack = (enemy, idleNeeded = 'yes') => {
     controlsElem.hidden = true;
     setTimeout(e => {
         animation(enemy.attack, enemy, 100);
         enemy.element.style.transition = '';
 
-        if (hero.life > 0) {
+        // if (hero.life > 0) {
             setTimeout(e => {
-                actionPop(`Got hit!`, '#ff0000')
+                actionPop(`Got hit!`, '#914e4e')
                 animation(hero.block, hero, 100);
                 playAudio(sound.attack)
             }, 300)
+        // }
+    }, 1000);
+
+    if (idleNeeded === 'yes') {
+        if (hero.life > 0) {
+            setTimeout(() => {
+                hero.element.style.transition = '';
+                hero.element.style.left = '';
+                animation(hero.idle, hero, 200, 'repeat');
+                controlsElem.hidden = false;
+            }, 1500 + hero.block.length * 100);
         }
-    }, 1200);
-
-
-    if (hero.life > 0) {
-        setTimeout(() => {
-            hero.element.style.transition = '';
-            hero.element.style.left = '';
-            animation(hero.idle, hero, 200, 'repeat');
-            controlsElem.hidden = false;
-        }, 1700 + hero.block.length * 100);
     }
 
     setTimeout(e => {
@@ -500,8 +481,12 @@ const enemyCounterAttack = (enemy) => {
     }, 1000 + ((enemy.attack.length) * 200));
 }
 
-const undeadSuperAttack = () => {
+const undeadSuperAttack = (idleNeeded = 'yes') => {
     controlsElem.hidden = true;
+
+    hero.element.style.transition = 'none';
+    hero.element.style.left = '18px';
+
     setTimeout(() => {
         controlsElem.hidden = true;
         animation(undead.attack2, undead, 100);
@@ -518,7 +503,7 @@ const undeadSuperAttack = () => {
         fx.element.style.left = 9 + 'px';
         fx.element.style.bottom = 55 + 'px';
         fx.element.style.zIndex = '1';
-        actionPop(`Enemy's super attack!`, '#12212c');
+        actionPop(`Enemy's super attack!`, '#4b251a');
         animation(fx.fxSuperUndead, fx, 100);
 
         setTimeout(() => {
@@ -535,45 +520,57 @@ const undeadSuperAttack = () => {
     setTimeout(() => {
         animation(hero.block, hero, 200);
     }, 800)
-    setTimeout(() => {
-        animation(hero.idle, hero, 200, 'repeat');
-    }, 800 + hero.block.length * 200)
+
+    if (idleNeeded === 'yes') {
+        setTimeout(() => {
+            animation(hero.idle, hero, 200, 'repeat');
+        }, 800 + hero.block.length * 200)
+    }
 }
 
 const actionPop = (text, color) => {
-    action.classList.add('visibility');
-    action.innerText = `${text}`;
-    action.style.color = `${color}`
-    action.style.top = 70 + 'px';
-    action.style.opacity = '100%';
+    const actionText = document.createElement('p');
+    actionText.classList.add('action');
+
+    const actionBg = document.createElement('div');
+    actionBg.classList.add('actionBg');
+
+    actionBg.append(actionText)
+    field.append(actionBg);
+
+    actionBg.classList.add('visibility');
+    actionBg.style.opacity = '0%';
+    actionText.innerText = `${text}`;
+    actionText.style.color = `${color}`
 
     setTimeout(() => {
-        action.style.opacity = '0';
-        action.style.top = 50 + 'px';
+        actionBg.style.top = 70 + 'px';
+        actionBg.style.opacity = '100%';
+    }, 200)
+
+    setTimeout(() => {
+        actionBg.style.opacity = '0';
+        actionBg.style.top = 50 + 'px';
     }, 800)
 
     setTimeout(() => {
-        action.innerText = ``;
-        action.style.color = ``
-        action.style.top = '';
-        action.style.opacity = '';
-        action.classList.remove('visibility');
+        actionBg.classList.remove('visibility');
+        field.removeChild(actionBg);
     }, 1500)
 }
 
-const checkStats = (allEnemies, undeadAttack = 'no') => {
-    console.log('checkStats')
+const checkStats = (timeout = (hero.block.length * 100) + 1100) => {
     const summonRandom = (list) => {
-        return list[Math.floor((Math.random() * list.length))];
+        const chosen = list[Math.floor((Math.random() * list.length))];
+        return summonCreature(chosen, 700, chosen.position);
     }
 
     controlsElem.hidden = true;
-    if (currentEnemy.life <= 0) {
 
+    if (currentEnemy.life <= 0) {
             setTimeout(() => {
                 animation(currentEnemy.die, currentEnemy, 100);
             }, (currentEnemy.hit.length * 100) + 1500);
-
 
             setTimeout(() => {
                 killedEnemies++;
@@ -596,12 +593,7 @@ const checkStats = (allEnemies, undeadAttack = 'no') => {
                         clearScene('victory');
                     }, 1800);
                 } else {
-                    let summon = summonRandom(allEnemies);
-                    summon();
-
-                    setTimeout(() => {
-                        watchLifeBarEnemy(currentEnemy.originalLife, currentEnemy);
-                    }, 1000)
+                    summonRandom([slime, skeleton, undead]);
                 }
 
             }, (currentEnemy.hit.length * 100) + 1500 + (currentEnemy.die.length * 100));
@@ -609,17 +601,10 @@ const checkStats = (allEnemies, undeadAttack = 'no') => {
 
 
     if (hero.life <= 0) {
-        if (undeadAttack === 'undead') {
             setTimeout(() => {
                 animation(hero.die, hero, 100);
                 clearScene();
-            }, 3500)
-        } else {
-            setTimeout(() => {
-                animation(hero.die, hero, 100);
-                clearScene();
-            }, (hero.block.length * 100) + 1100)
-        }
+            }, timeout)
     }
 }
 
@@ -639,7 +624,6 @@ const createBarIcon = (png, type, iconType) => {
     }
     return icon;
 }
-
 
 const watchHeroBar = (originalStat, type, source, target) => {
     const hit = document.getElementById('hit');
@@ -667,6 +651,7 @@ const watchHeroBar = (originalStat, type, source, target) => {
         hit.style.backgroundImage = 'url("assets/bar/attack-button.png")';
     }
 }
+
 const watchLifeBarEnemy = (originalEnemyLife, enemy) => {
     enemyLife.replaceChildren();
     if (enemy.life < originalEnemyLife && enemy.life > 0) {
@@ -690,7 +675,6 @@ const watchLifeBarEnemy = (originalEnemyLife, enemy) => {
 }
 
 const clearScene = (victory = 'no') => {
-    console.log('clearScene')
     overlay.hidden = false;
     overlay.classList.add('is-visible');
 
@@ -717,71 +701,34 @@ const clearScene = (victory = 'no') => {
     });
 }
 
-const endlessScene = () => {
-    console.log('endlessScene')
-    playAudio(sound.bg);
-    setInterval(() => {
-        playAudio(sound.bg);
-    }, 89000);
+const willEnemyHit = () => {
+    let probability = Math.random();
+    return probability < 0.5;
+}
 
+const endlessScene = () => {
     hit = document.getElementById('hit');
     block = document.getElementById('block')
-
-    field.removeChild(hero.element);
 
     if (main.querySelector('.controls')) {
         main.removeChild(main.querySelector('.controls'))
     }
-    const controls = summonControls();
+
+    const controls = createControls();
     main.append(controls);
 
     summonHero();
 
-
-    const enemies = [summonSlime, summonSkeleton, summonUndead];
     const originalHeroLife = hero.life;
     const originalHeroShield = hero.originalShield;
 
-    const willEnemyHit = () => {
-        let probability = Math.random();
-        return probability < 0.5;
-    }
-
-    heroLife.replaceChildren();
-    heroShield.replaceChildren();
-    heroBless.replaceChildren();
-
-    for (let i = 0; i < hero.life; i++) {
-        heroLife.append(createBarIcon('heart-full', 'hero', 'heart'));
-    }
-    for (let i = 0; i < hero.originalShield; i++) {
-        heroShield.append(createBarIcon('shield-full', 'hero', 'shield'));
-    }
-    for (let i = 0; i < 3; i++) {
-        heroBless.append(createBarIcon('bless-empty', 'hero', 'bless'));
-    }
-
-
-    animation(hero.idle, hero, 200, 'repeat');
-
-    if (currentEnemy !== null) {
-        field.removeChild(currentEnemy.element);
-    }
-
-    summonSlime();
-
-    enemyLife.replaceChildren();
-
-    for (let i = 0; i < currentEnemy.life; i++) {
-        enemyLife.append(createBarIcon('heart-full', 'enemy', 'heart'));
-    }
+    summonCreature(slime, 700, slime.position);
 
     const turn = () => {
         controls.addEventListener('click', e => {
-            console.log('aa');
             const target = e.target
             const enemyHit = willEnemyHit();
-            let undeadAttack = false;
+            let attack = 'usual';
 
             if (target.classList.contains('hit')) {
                 if (hero.superStack === 3) {
@@ -827,13 +774,13 @@ const endlessScene = () => {
                                 enemyCounterAttack(currentEnemy);
                                 currentEnemy.superStack++;
                             } else if (currentEnemy.superStack === 3) {
+                                attack = 'super';
                                 currentEnemy.superStack = 0;
                                 enemyCounterAttack(currentEnemy);
-                                setTimeout(() => {
-                                    undeadSuperAttack();
-                                }, 1700)
                                 hero.life -= 2;
-                                undeadAttack = true;
+                                setTimeout(() => {
+                                    hero.life <= 0 ? undeadSuperAttack('no') : undeadSuperAttack();
+                                }, 1700)
                                 setTimeout(() => {
                                     watchHeroBar(originalHeroLife, 'heart', hero.life, heroLife);
                                 }, 3000);
@@ -850,11 +797,8 @@ const endlessScene = () => {
                     }
                 }
 
-                if (undeadAttack) {
-                    checkStats(enemies, 'undead');
-                } else {
-                    checkStats(enemies);
-                }
+                (attack === 'super') ? checkStats(3500) : checkStats();
+
             } else if (target.classList.contains('block')) {
                 if (hero.shield > 0) {
                     if (enemyHit === true) {
@@ -889,17 +833,11 @@ const endlessScene = () => {
                     actionPop('You don\'t have any shields', '#252424');
                 }
             }
-
-            console.log(hero.life, currentEnemy.life);
         })
-
-
     }
 
     turn();
-
 }
-
 
 const startTheGame = () => {
     play.addEventListener('click', e => {
@@ -925,21 +863,16 @@ const startTheGame = () => {
 }
 
 const preloadImages = (sources, callback) => {
-    let imgs = [],   // массив HTML-элементов img для предзагрузки картинок
-        loaded = []; // массив HTML-элементов img с загруженной картинкой
+    let imgs = [],
+        loaded = [];
 
-    // цикл выполнения предзагрузки заданных картинок
     for (let i = 0; i < sources.length; i++) {
         let elem = sources[i];
         for (let j = 0; j < elem.length; j++) {
 
-            // запуск предзагрузки очередной картинки
             let img = document.createElement("img");
             img.src = sources[i][j];
 
-            // после окончания предзагрузки картинки поместить ее в массив загруженных,
-            // и проверить, если это была последняя из заданных картинок, то запустить
-            // функцию callback
             img.addEventListener("load", onLoad);
             img.addEventListener("error", onLoad);
             function onLoad() {
